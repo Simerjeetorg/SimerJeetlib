@@ -1,155 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimerJeet LIB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: white;
-            text-align: center;
-        }
-        .navbar {
-            display: flex;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: 0.3s;
-        }
-        .navbar a:hover {
-            color: #ffdd57;
-        }
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 90vh;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-in-out;
-        }
-        .hero.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-                    .btn {
-                margin-top: 20px;
-                padding: 10px 20px;
-                font-size: 18px;
-                background: #ffdd57;
-                color: black;
-                border: none;
-                cursor: pointer;
-                transition: 0.3s;
-                border-radius: 5px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimerJeet LIB</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      color: white;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ffdd57;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-in-out;
+    }
+
+    .hero.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background: #ffdd57;
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background: #ffcc00;
+    }
+
+    .section {
+      padding: 50px 20px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-in-out;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #team {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+    .team-member {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+    }
+
+    .team-member img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+      }
+
+      .team {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".section, .hero");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
             }
-            .btn:hover {
-                background: #ffcc00;
-            }
-        .section {
-            padding: 50px 20px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-in-out;
-        }
-        .section.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .team {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .team-member {
-            background: rgba(0, 0, 0, 0.6);
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-        }
-        .team-member img {
-            width: 100px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-            }
-            .team {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sections = document.querySelectorAll(".section, .hero");
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("show");
-                    }
-                });
-            }, { threshold: 0.3 });
-            sections.forEach(section => observer.observe(section));
         });
-    </script>
+    }, { threshold: 0.3 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+});
+
+  </script>
 </head>
+
 <body>
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div id="home" class="hero">
+    <h1>Welcome to SimerJeet LIB</h1>
+    <p>Experience the magic of design and simplicity</p>
+    <a href="#services"><button class="btn">Get Notes</button></a>
+  </div>
+  <div id="about" class="section">
+    <h2>About Us</h2>
+    <p> We are a team of creative professionals dedicated to bringing innovative designs to life.</p>
+    <h2>I've seen students struggling to find study materials,
+      <h2 />
+      <h2>which is why I've created this website
+        <h2 />
+        <h2> To provide them with the resources they need and help alleviate their workload
+          <h2 />
+  </div>
+  <div id="services" class="section">
+    <h2>Our Services</h2>
+    <h1>We provide a huge library.</h1>
+    <span></span>
+    <h2>To you guys</h2>
+    <a href="https://www.mediafire.com/file/n50e9lq2htlgwd7/cprogramming_notes_by_simerjeetorg.zip/file"><button>C Notes</button></a>
+    <h1 style="color: black; font-family: Arial, Helvetica, sans-serif;">FOR FREE</h1>
+  </div>
+  <div id="team" class="section">
+    <h2>Meet Our Team</h2>
+    <div class="team">
     </div>
-    <div id="home" class="hero">
-        <h1>Welcome to SimerJeet LIB</h1>
-        <p>Experience the magic of design and simplicity</p>
-        <button class="btn">Get Started</button>
+    <div class="team-member">
+      <img src="team/founder.jpg" alt="Team Member">
+      <h3>Simerjeet</h3>
+      <p>DeV</p>
     </div>
-    <div id="about" class="section">
-        <h2>About Us</h2>
-        <p> We are a team of creative professionals dedicated to bringing innovative designs to life.</p>
-    <h2>I've seen students struggling to find study materials,<h2/>
-    <h2>which is why I've created this website<h2/>
-    <h2> To provide them with the resources they need and help alleviate their workload<h2/>
-    </div>
-    <div id="services" class="section">
-        <h2>Our Services</h2>
-        <p>We provide web design, development, and branding solutions for businesses of all sizes.</p>
-    </div>
-    <div id="team" class="section">
-        <h2>Meet Our Team</h2>
-        <div class="team">
-            </div>
-            <div class="team-member">
-                <img src="Team/founder" alt="Team Member">
-                <h3>Simerjeet</h3>
-                <p>DeV</p>
-            </div>
-        </div>
-    </div>
-    <div id="contact" class="section">
-        <h2>Contact Us</h2>
-        <p>Email: contact@fancysite.com | Phone: 123-456-7890</p>
-    </div>
+  </div>
+  </div>
+  <div id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Email: Simerjeetbgt@gmail.com | Phone: Coming-Soon</p>
+  </div>
 </body>
+
 </html>
